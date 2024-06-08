@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require('cors')
 const UserModel = require('./models/User')
+const TournamentModel = require("./models/Tournament")
 
 const app = express()
 app.use(express.json())
@@ -18,7 +19,7 @@ const corsOptions = {
 
   
 
-mongoose.connect("mongodb://localhost:27017/user")
+mongoose.connect("mongodb+srv://test:test@cluster0.jxib0sn.mongodb.net/user")
 
 
 app.post('/login', (req, res) =>{
@@ -42,6 +43,19 @@ app.post('/register', (req, res) =>{
     .then(user=> res.json(user))
     .catch(err=>res.json(err))
 })
+
+app.post('/tournament/create', (req, res) =>{
+    TournamentModel.create(req.body)
+    .then(tournament=> res.json(tournament))
+    .catch(err=>res.json(err))
+})
+
+app.get('/tournament', (req, res) => {
+    TournamentModel.find()
+      .then(tournaments => res.json(tournaments))
+      .catch(err => res.status(500).json({ error: 'Internal server error' }));
+  });
+  
 
 app.listen(3001, () => {
     console.log("server is running")
