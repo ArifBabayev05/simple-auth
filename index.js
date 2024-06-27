@@ -10,8 +10,8 @@ app.use(express.json())
 app.use(cors())
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
-    optionsSuccessStatus: 200 // Some legacy browsers (IE11) may not support 204
+    origin: ['http://localhost:5173', 'https://igame.live'],
+    optionsSuccessStatus: 200
   };
   
 
