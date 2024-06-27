@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 const UserModel = require('./models/User');
 const TournamentModel = require("./models/Tournament");
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(express.json());
