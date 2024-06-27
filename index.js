@@ -8,21 +8,20 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://igame.live'],
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+    origin: ['http://localhost:5173', 'https://igame.live'],
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
 
-// Handle preflight requests
 app.options('*', cors(corsOptions));
 
-mongoose.connect("mongodb+srv://test:test@cluster0.jxib0sn.mongodb.net/user", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+mongoose.connect("mongodb+srv://test:test@cluster0.jxib0sn.mongodb.net/user")
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log(err));
 
